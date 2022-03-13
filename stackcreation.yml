@@ -1,19 +1,23 @@
 Description: 
     Ahmed Essam / Udacity
-    This template is for Challenge 1 in udacity nanodegree - Create an EC2 instance in a given VPC
+
 
 Parameters:
   KeyName:
       Type: AWS::EC2::KeyPair::KeyName
+      Deafult: "newKey"
   myVPC:
       Description: VPC used to deploy our resources below
       Type: AWS::EC2::VPC::Id
+      Default: "vpc-052b9b6788b459f94"
   PublicSubnet:
       Description: Subnet to be used for our Web Server
       Type: AWS::EC2::Subnet::Id
+      Default: "subnet-043a26f1ff790c296"
   AMItoUse:
       Description: AMI to use for our base image
       Type: String
+      Default: "ami-0892d3c7ee96c0bf7"
 Resources:
   myWebAccessSecurityGroup:
     Type: AWS::EC2::SecurityGroup
