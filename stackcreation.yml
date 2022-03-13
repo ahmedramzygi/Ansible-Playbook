@@ -1,11 +1,7 @@
-Description: 
-    Ahmed Essam / Udacity
-
+AWSTemplateFormatVersion: 2010-09-09
+Description: Rollback 
 
 Parameters:
-  KeyName:
-      Type: AWS::EC2::KeyPair::KeyName
-      Deafult: "newKey"
   myVPC:
       Description: VPC used to deploy our resources below
       Type: AWS::EC2::VPC::Id
@@ -19,38 +15,28 @@ Parameters:
       Type: String
       Default: "ami-0892d3c7ee96c0bf7"
 Resources:
-  myWebAccessSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
+  EC2Instance:
+    Type: 'AWS::EC2::Instance'
     Properties:
-        GroupDescription: Allow http to our test host
-        VpcId:
-          Ref: myVPC
-        SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 3000
-          ToPort: 3000
-          CidrIp: 0.0.0.0/0
-        SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 22
-          ToPort: 22
-          CidrIp: 0.0.0.0/0
-        Tags: 
-          - Key: Project
-            Value: "udacity"
-  myWebServerInstance: 
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: t2.micro
       ImageId: !Ref AMItoUse
-      KeyName: !Ref KeyName
+      InstanceType: t2.micro
       NetworkInterfaces: 
         - AssociatePublicIpAddress: "true"
           DeviceIndex: "0"
           GroupSet: 
             - Ref: "myWebAccessSecurityGroup"
           SubnetId: 
-            Ref: "PublicSubnet"
-          
+            Ref: "PublicSubnet" 
+  myWebAccessSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+        GroupDescription: Enable SSH access via port 22
+        VpcId:
+          Ref: myVPC
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: '22'
+            ToPort: '22'
+            CidrIp: 0.0.0.0/0
 
       
