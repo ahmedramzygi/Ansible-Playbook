@@ -10,9 +10,9 @@ jobs:
       - run:
           name: Create Cloudformation Stack
           command: |
-            aws cloudformation deploy 
-              --template-file stackcreation.yml 
-              --stack-name myStack
+            aws cloudformation deploy \
+              --template-file stackcreation.yml \
+              --stack-name myStack \
               --region us-west-2
 
 workflows:
