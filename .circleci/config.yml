@@ -13,7 +13,6 @@ jobs:
             aws cloudformation deploy \
               --template-file stackcreation.yml \
               --parameters-file stackcreation.json \
-              --stack-name newStackCirle \
               --region us-west-2
 
 workflows:
